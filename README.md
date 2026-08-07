@@ -18,4 +18,4 @@ SwayFX enhanced dotfiles on Void Linux. Minimalist, fast, and fully optimized de
 ## Quick Start
 
   
-    git clone [https://github.com/iusedevuanbtw/swayfx-enhanced-dot.git](https://github.com/iusedevuanbtw/swayfx-enhanced-dot.git) ~/.config/sway-dots
+    git clone https://github.com/iusedevuanbtw/swayfx-enhanced-dot.git ~/.config/sway-dots
