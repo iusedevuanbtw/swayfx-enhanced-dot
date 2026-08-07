@@ -17,6 +17,7 @@ SwayFX enhanced dotfiles on Void Linux. Minimalist, fast, and fully optimized de
 
 ## Quick Start
 
-1. Clone repository:
-   ```bash
-   git clone https://github.com/iusedevuanbtw/swayfx-enhanced-dot.git /tmp/swayfx-dot
+Run the installer:
+
+```bash
+git clone https://github.com/iusedevuanbtw/swayfx-enhanced-dot.git /tmp/swayfx-dot && cd /tmp/swayfx-dot && chmod +x install.sh && ./install.sh
