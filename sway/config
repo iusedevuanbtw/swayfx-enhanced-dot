@@ -1,0 +1,228 @@
+set $mod Mod4
+set $term kitty
+set $menu wofi --show drun -c ~/.config/wofi/config
+
+# Appearance & Theme
+gaps inner 14
+gaps outer 8
+smart_gaps on
+smart_borders on
+hide_edge_borders smart
+default_border pixel 2
+default_floating_border pixel 2
+titlebar_padding 6
+font pango:JetBrainsMono Nerd Font 10
+
+client.focused          #89b4fa #89b4fa #11111b #89b4fa #89b4fa
+client.focused_inactive #313244 #313244 #cdd6f4 #313244 #313244
+client.unfocused        #313244 #313244 #6c7086 #313244 #313244
+client.urgent           #f38ba8 #f38ba8 #11111b #f38ba8 #f38ba8
+
+seat seat0 xcursor_theme Bibata-Modern-Ice 24
+
+# Window Rules
+for_window [app_id="firefox"] opacity 1.0
+for_window [app_id="^(foot|Alacritty|kitty|org.wezfurlong.wezterm)$"] opacity 0.88
+for_window [window_role="pop-up"] opacity 1.0
+for_window [app_id="mpv"] opacity 1.0, fullscreen enable
+for_window [app_id="thunar"] opacity 1.0
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="blueman-manager"] floating enable
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="steam"] floating disable
+for_window [title="NEAT Racing"] floating disable
+
+for_window [app_id="kitty" title="lavat"] saturation set 1.4
+for_window [app_id="kitty" title="asciiquarium"] saturation set 1.5
+for_window [app_id="kitty" title="cmatrix"] saturation set 1.6
+for_window [app_id="kitty" title="cbonsai"] saturation set 1.3
+for_window [app_id="kitty" title="btop"] saturation set 1.2
+for_window [app_id="kitty" title="overlay"] floating enable, sticky enable, border pixel 1, resize set 500 300, move position 20 20
+
+# SwayFX Effects
+blur enable
+blur_xray disable
+blur_passes 4
+blur_radius 8
+blur_noise 0.04
+blur_brightness 0.90
+blur_contrast 1.10
+blur_saturation 1.20
+
+corner_radius 14
+smart_corner_radius on
+
+shadows enable
+shadows_on_csd enable
+shadow_blur_radius 45
+shadow_color #000000d0
+shadow_offset 0 12
+
+default_dim_inactive 0.25
+dim_inactive_colors.unfocused #00000060
+
+animation_duration_ms 350
+
+liquid_glass enable
+liquid_glass_bezel_width 0.25
+liquid_glass_brightness_boost 0.15
+liquid_glass_chromatic_aberration 0.045
+liquid_glass_noise_intensity 0.02
+liquid_glass_refraction_index 1.65
+liquid_glass_saturation_boost 1.25
+liquid_glass_specular on
+liquid_glass_specular_opacity 0.50
+liquid_glass_specular_angle 60
+liquid_glass_surface convex_squircle
+liquid_glass_thickness 0.70
+
+for_window [floating] liquid_glass enable
+for_window [tiling] liquid_glass disable
+
+layer_effects "waybar" {
+    blur enable
+    blur_ignore_transparent enable
+    shadows enable
+    corner_radius 14
+}
+layer_effects "wofi" {
+    blur enable
+    shadows enable
+    corner_radius 16
+}
+layer_effects "notifications" {
+    blur enable
+    shadows enable
+    corner_radius 14
+}
+
+# Autostart
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec /usr/libexec/polkit-gnome-authentication-agent-1
+exec swaybg -i /home/void/Pictures/wallpaper.jpg -m fill
+exec mako
+exec nm-applet --indicator
+exec swayosd-server
+exec wlsunset -l 50.25 -L 28.66 -t 4000 -T 6500
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+exec python3 ~/.config/sway/scripts/auto_layout.py
+
+exec swayidle -w \
+    timeout 300 'swaylock -f -C ~/.config/swaylock/config' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -f -C ~/.config/swaylock/config'
+
+# Input
+input type:keyboard {
+    xkb_layout us,ru
+    xkb_options grp:alt_shift_toggle,caps:escape
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+    dwt enabled
+}
+
+floating_modifier $mod normal
+
+# Keybindings
+bindsym --to-code $mod+Return exec $term
+bindsym --to-code $mod+d exec $menu
+bindsym --to-code $mod+b exec firefox
+bindsym --to-code $mod+e exec thunar
+bindsym --to-code $mod+q kill
+bindsym --to-code $mod+Shift+q exec swaymsg kill
+bindsym --to-code $mod+f fullscreen toggle
+bindsym --to-code $mod+Shift+f layout tabbed
+bindsym --to-code $mod+Shift+t layout toggle split
+bindsym --to-code $mod+space floating toggle
+bindsym --to-code $mod+Shift+space fullscreen toggle
+bindsym --to-code $mod+v splith
+bindsym --to-code $mod+minus splitv
+bindsym --to-code $mod+t exec QT_QPA_PLATFORM=wayland XDG_CURRENT_DESKTOP=wlroots Telegram
+
+bindsym --to-code $mod+h focus left
+bindsym --to-code $mod+j focus down
+bindsym --to-code $mod+k focus up
+bindsym --to-code $mod+l focus right
+bindsym --to-code $mod+Left focus left
+bindsym --to-code $mod+Down focus down
+bindsym --to-code $mod+Up focus up
+bindsym --to-code $mod+Right focus right
+
+bindsym --to-code $mod+Shift+h move left
+bindsym --to-code $mod+Shift+j move down
+bindsym --to-code $mod+Shift+k move up
+bindsym --to-code $mod+Shift+l move right
+
+bindsym --to-code $mod+1 workspace number 1
+bindsym --to-code $mod+2 workspace number 2
+bindsym --to-code $mod+3 workspace number 3
+bindsym --to-code $mod+4 workspace number 4
+bindsym --to-code $mod+5 workspace number 5
+bindsym --to-code $mod+Shift+1 move container to workspace number 1
+bindsym --to-code $mod+Shift+2 move container to workspace number 2
+bindsym --to-code $mod+Shift+3 move container to workspace number 3
+bindsym --to-code $mod+Shift+4 move container to workspace number 4
+bindsym --to-code $mod+Shift+5 move container to workspace number 5
+
+bindsym --to-code $mod+s exec steam
+bindsym --to-code $mod+6 workspace number 6; exec kitty -T lavat -e /usr/local/bin/lavat
+bindsym --to-code $mod+Shift+6 move container to workspace number 6
+bindsym --to-code $mod+7 workspace number 7; exec kitty -T asciiquarium -e asciiquarium
+bindsym --to-code $mod+8 workspace number 8; exec kitty -T cmatrix -e cmatrix -b -C blue
+bindsym --to-code $mod+9 workspace number 9; exec kitty -T cbonsai -e cbonsai -l -i
+bindsym --to-code $mod+Shift+Return exec kitty -T overlay -e btop
+
+bindsym --to-code $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
+bindsym Print exec grim - | swappy -f -
+bindsym --to-code $mod+Print exec grim -g "$(slurp)" "$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
+bindsym --to-code $mod+c exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n1 | cut -d' ' -f4 | wl-copy
+
+bindsym --to-code $mod+Page_Up exec swaymsg opacity plus 0.05
+bindsym --to-code $mod+Page_Down exec swaymsg opacity minus 0.05
+bindsym --to-code $mod+Shift+b exec swaymsg blur toggle
+bindsym --to-code $mod+Shift+r exec swaymsg shadows toggle
+bindsym --to-code $mod+Shift+g exec swaymsg liquid_glass toggle
+
+bindsym --to-code $mod+m mark --add _marked
+bindsym --to-code $mod+Shift+m unmark _marked
+bindsym --to-code $mod+apostrophe [con_mark="_marked"] focus
+
+bindsym --to-code $mod+p exec wlogout -b 5
+bindsym --to-code $mod+period exec wofi --show emoji -c ~/.config/wofi/config
+bindsym --to-code $mod+Shift+v exec sh -c 'cliphist list | wofi --dmenu -c ~/.config/wofi/config | cliphist decode | wl-copy'
+bindsym --to-code $mod+w exec ~/.config/sway/scripts/random_wallpaper.sh
+bindsym --to-code $mod+n exec ~/.config/sway/scripts/toggle_nightlight.sh
+
+bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
+bindsym XF86AudioLowerVolume exec swayosd-client --output-volume lower
+bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
+bindsym XF86MonBrightnessUp exec swayosd-client --brightness raise
+bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+bindsym --to-code $mod+Shift+w exec swaymsg reload
+bindsym --to-code $mod+Escape exec swaylock -f -C ~/.config/swaylock/config
+bindsym --to-code $mod+Shift+e exec wlogout -b 5
+
+mode "resize" {
+    bindsym --to-code h resize shrink width 20px
+    bindsym --to-code j resize grow height 20px
+    bindsym --to-code k resize shrink height 20px
+    bindsym --to-code l resize grow width 20px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym --to-code $mod+r mode "resize"
+
+bar {
+    swaybar_command waybar
+}
+
+include /etc/sway/config.d/*
