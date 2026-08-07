@@ -1,0 +1,30 @@
+{
+    "label": "lock",
+    "action": "swaylock -f -C /home/void/.config/swaylock/config",
+    "text": "Lock",
+    "keybind": "l"
+}
+{
+    "label": "logout",
+    "action": "swaymsg exit",
+    "text": "Logout",
+    "keybind": "e"
+}
+{
+    "label": "suspend",
+    "action": "zzz",
+    "text": "Suspend",
+    "keybind": "s"
+}
+{
+    "label": "reboot",
+    "action": "reboot",
+    "text": "Reboot",
+    "keybind": "r"
+}
+{
+    "label": "shutdown",
+    "action": "poweroff",
+    "text": "Shutdown",
+    "keybind": "p"
+}

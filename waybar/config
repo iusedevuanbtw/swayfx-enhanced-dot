@@ -1,0 +1,58 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 4,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["custom/notifications", "clock"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "tray"],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{name}"
+    },
+    "sway/mode": {
+        "format": "<span>{}</span>"
+    },
+    "clock": {
+        "format": "{:%H:%M   %d.%m.%Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+        "format": "CPU {usage}%",
+        "tooltip": true,
+        "interval": 2
+    },
+    "memory": {
+        "format": "RAM {}%",
+        "interval": 2
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "TEMP {temperatureC}°C"
+    },
+    "network": {
+        "format-wifi": "WIFI {essid}",
+        "format-ethernet": "ETH {ipaddr}",
+        "format-disconnected": "OFFLINE",
+        "tooltip-format": "{ifname} via {gwaddr}"
+    },
+    "pulseaudio": {
+        "format": "VOL {volume}%",
+        "format-muted": "MUTED",
+        "on-click": "pavucontrol"
+    },
+    "custom/notifications": {
+        "format": "NOTIF",
+        "exec": "sh -c 'cnt=$(makoctl list 2>/dev/null | jq \".data[0] | length\" 2>/dev/null || echo 0); echo \"NOTIF\"'",
+        "interval": 1,
+        "on-click": "makoctl dismiss",
+        "tooltip": false
+    },
+    "tray": {
+        "spacing": 10
+    }
+}

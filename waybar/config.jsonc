@@ -1,0 +1,10 @@
+{
+    "layer": "top",
+    "position": "top",
+    "output": "DP-2",
+    "height": 30,
+    "modules-left": ["clock"],
+    "clock": {
+        "format": "{:%H:%M}"
+    }
+}
