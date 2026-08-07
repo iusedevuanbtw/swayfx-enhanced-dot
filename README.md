@@ -19,7 +19,4 @@ SwayFX enhanced dotfiles on Void Linux. Minimalist, fast, and fully optimized de
 
 1. Clone repository:
    ```bash
-   git clone [https://github.com/iusedevuanbtw/swayfx-enhanced-dot.git /tmp/swayfx-dot
-
-    cp
-   cp -r /tmp/swayfx-dot/{mako,sway,swaylock,waybar,wlogout,wofi} ~/.config/
+   git clone https://github.com/iusedevuanbtw/swayfx-enhanced-dot.git /tmp/swayfx-dot
